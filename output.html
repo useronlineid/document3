@@ -22,19 +22,15 @@
 
         .container {
             background: transparent;
-            padding: 150px;
+            padding: 20px;
         }
 
         .input {
             margin-bottom: 15px;
-            color: #828282;
-            font-size: 35px;
         }
 
         .input:last-child {
             color: red;
-            word-wrap: break-word;
-            width: 100%;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -68,7 +64,7 @@
             outputs[5].textContent = urlParams.get('input6');
 
             const imageURL = urlParams.get('imageURL');
-            document.body.style.backgroundImage = url(${imageURL});
+            document.body.style.backgroundImage = `url(${imageURL})`;
 
             html2canvas(document.getElementById('content'), { backgroundColor: null }).then(canvas => {
                 document.body.innerHTML = '';
