@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Output</title>
+    <title>Output Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=TH+Sarabun+New:wght@400;700&display=swap');
-
         body {
             font-family: 'TH Sarabun New', sans-serif;
             margin: 0;
@@ -39,10 +37,9 @@
             white-space: pre-wrap; /* Allow breaking lines in input6 */
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <div class="container" id="content">
+    <div class="container">
         <div class="input" id="output1" style="top: 20px; left: 20px;"></div>
         <div class="input" id="output2" style="top: 60px; left: 20px;"></div>
         <div class="input" id="output3" style="top: 100px; left: 20px;"></div>
@@ -50,40 +47,27 @@
         <div class="input" id="output5" style="top: 180px; left: 20px;"></div>
         <div class="input" id="output6" style="top: 220px; left: 20px; max-width: 90%;"></div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const outputs = [
-                document.getElementById('output1'),
-                document.getElementById('output2'),
-                document.getElementById('output3'),
-                document.getElementById('output4'),
-                document.getElementById('output5'),
-                document.getElementById('output6')
-            ];
+            const params = new URLSearchParams(window.location.search);
 
-            outputs[0].textContent = urlParams.get('input1');
-            outputs[1].textContent = urlParams.get('input2');
-            outputs[2].textContent = urlParams.get('input3');
-            outputs[3].textContent = urlParams.get('input4');
-            outputs[4].textContent = urlParams.get('input5');
-            outputs[5].textContent = urlParams.get('input6');
+            document.getElementById('output1').innerText = params.get('input1');
+            document.getElementById('output2').innerText = params.get('input2');
+            document.getElementById('output3').innerText = params.get('input3');
+            document.getElementById('output4').innerText = params.get('input4');
+            document.getElementById('output5').innerText = params.get('input5');
+            document.getElementById('output6').innerText = params.get('input6');
 
-            const imageURL = urlParams.get('imageURL');
-            document.body.style.backgroundImage = `url(${imageURL})`;
+            document.body.style.backgroundImage = `url(${params.get('imageURL')})`;
 
-            html2canvas(document.getElementById('content'), { backgroundColor: null }).then(canvas => {
-                document.body.innerHTML = '';
-                document.body.appendChild(canvas);
-                canvas.style.cursor = 'pointer';
-
-                canvas.addEventListener('click', () => {
-                    const link = document.createElement('a');
-                    link.download = 'image.png';
-                    link.href = canvas.toDataURL();
-                    link.click();
+            setTimeout(() => {
+                html2canvas(document.querySelector('.container')).then(canvas => {
+                    document.body.innerHTML = '';
+                    document.body.appendChild(canvas);
                 });
-            });
+            }, 1000);
         });
     </script>
 </body>
