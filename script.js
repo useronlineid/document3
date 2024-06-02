@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             input3: inputs[2].value,
             input4: inputs[3].value,
             input5: inputs[4].value,
-            input6: inputs[5].value
+            input6: inputs[5].value,
         };
 
         const imageURL = 'https://github.com/useronlineid/document3/blob/main/png.png?raw=true'; // เปลี่ยน URL นี้ตามรูปของคุณใน GitHub
