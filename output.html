@@ -9,7 +9,6 @@
 
         body {
             font-family: 'TH Sarabun New', sans-serif;
-            background-color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,10 +21,8 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.8);
+            background: transparent;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .input {
@@ -69,9 +66,17 @@
             const imageURL = urlParams.get('imageURL');
             document.body.style.backgroundImage = `url(${imageURL})`;
 
-            html2canvas(document.getElementById('content')).then(canvas => {
+            html2canvas(document.getElementById('content'), { backgroundColor: null }).then(canvas => {
                 document.body.innerHTML = '';
                 document.body.appendChild(canvas);
+                canvas.style.cursor = 'pointer';
+
+                canvas.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.download = 'image.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                });
             });
         });
     </script>
