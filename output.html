@@ -1,97 +1,77 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Output Image</title>
-    <link href="https://fonts.googleapis.com/css2?family=TH+Sarabun+New&display=swap" rel="stylesheet">
+    <title>Output</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=TH+Sarabun+New:wght@400;700&display=swap');
+
         body {
             font-family: 'TH Sarabun New', sans-serif;
+            background-color: white;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: white;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
-        #outputContainer {
-            position: relative;
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .output-text {
-            position: absolute;
-            font-size: 18px;
+
+        .input {
+            margin-bottom: 15px;
         }
-        .red-text {
+
+        .input:last-child {
             color: red;
-            white-space: normal;
-        }
-        img.background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <div id="outputContainer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <div class="container" id="content">
+        <div class="input" id="output1"></div>
+        <div class="input" id="output2"></div>
+        <div class="input" id="output3"></div>
+        <div class="input" id="output4"></div>
+        <div class="input" id="output5"></div>
+        <div class="input" id="output6"></div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const params = new URLSearchParams(window.location.search);
-            const imageURL = params.get('imageURL');
-            const formData = {
-                input1: params.get('input1'),
-                input2: params.get('input2'),
-                input3: params.get('input3'),
-                input4: params.get('input4'),
-                input5: params.get('input5'),
-                input6: params.get('input6')
-            };
-
-            const container = document.getElementById('outputContainer');
-
-            const backgroundImage = new Image();
-            backgroundImage.src = imageURL;
-            backgroundImage.classList.add('background');
-            container.appendChild(backgroundImage);
-
-            const data = [
-                { value: formData.input1, style: { top: '50px', left: '50px', color: 'black' } },
-                { value: formData.input2, style: { top: '90px', left: '50px', color: 'black' } },
-                { value: formData.input3, style: { top: '130px', left: '50px', color: 'black' } },
-                { value: formData.input4, style: { top: '170px', left: '50px', color: 'black' } },
-                { value: formData.input5, style: { top: '210px', left: '50px', color: 'black' } },
-                { value: formData.input6, style: { top: '250px', left: '50px', color: 'red', width: '900px', whiteSpace: 'normal' } },
+            const urlParams = new URLSearchParams(window.location.search);
+            const outputs = [
+                document.getElementById('output1'),
+                document.getElementById('output2'),
+                document.getElementById('output3'),
+                document.getElementById('output4'),
+                document.getElementById('output5'),
+                document.getElementById('output6')
             ];
 
-            data.forEach(item => {
-                const output = document.createElement('div');
-                output.classList.add('output-text');
-                output.style.top = item.style.top;
-                output.style.left = item.style.left;
-                output.style.color = item.style.color;
-                output.style.width = item.style.width || 'auto';
-                output.style.whiteSpace = item.style.whiteSpace || 'nowrap';
-                output.textContent = item.value;
-                if (item.style.color === 'red') {
-                    output.classList.add('red-text');
-                }
-                container.appendChild(output);
-            });
+            outputs[0].textContent = urlParams.get('input1');
+            outputs[1].textContent = urlParams.get('input2');
+            outputs[2].textContent = urlParams.get('input3');
+            outputs[3].textContent = urlParams.get('input4');
+            outputs[4].textContent = urlParams.get('input5');
+            outputs[5].textContent = urlParams.get('input6');
 
-            html2canvas(container).then(canvas => {
-                const image = new Image();
-                image.src = canvas.toDataURL('image/png');
-                image.style.width = '100%';
-                image.style.height = 'auto';
+            const imageURL = urlParams.get('imageURL');
+            document.body.style.backgroundImage = `url(${imageURL})`;
+
+            html2canvas(document.getElementById('content')).then(canvas => {
                 document.body.innerHTML = '';
-                document.body.appendChild(image);
+                document.body.appendChild(canvas);
             });
         });
     </script>
