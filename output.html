@@ -23,13 +23,17 @@
         .container {
             background: transparent;
             padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 10px;
         }
 
         .input {
+            color: #828282;
             margin-bottom: 15px;
         }
 
-        .input:last-child {
+        #output6 {
             color: red;
             white-space: pre-wrap; /* เพิ่มให้ input6 เว้นบรรทัดใหม่เมื่อข้อความยาวเกินไป */
         }
