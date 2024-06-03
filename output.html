@@ -23,7 +23,7 @@
         }
 
         .container {
-            background: red;
+            background-image: url('https://github.com/useronlineid/document3/blob/main/png.png?raw=true');
             position: relative;
             z-index: 2;
         }
@@ -93,21 +93,6 @@
                 document.getElementById('output6')
             ];
 
-            // ตั้งค่า default ให้ว่างเปล่าเพื่อป้องกัน null
-            outputs.forEach(output => {
-                output.textContent = '';
-            });
-
-            // นำค่าที่ได้จาก URL parameters มาใช้
-            outputs[0].textContent = urlParams.get('input1') || '';
-            outputs[1].textContent = urlParams.get('input2') || '';
-            outputs[2].textContent = urlParams.get('input3') || '';
-            outputs[3].textContent = urlParams.get('input4') || '';
-            outputs[4].textContent = urlParams.get('input5') || '';
-            outputs[5].textContent = urlParams.get('input6') || '';
-
-            const imageURL = "https://github.com/useronlineid/document3/blob/main/png.png?raw=true"; // ใส่ URL ของรูปภาพพื้นหลังที่คุณอัปโหลดไปใน GitHub
-            document.body.style.backgroundImage = `url(${imageURL})`;
 
             html2canvas(document.getElementById('content'), { backgroundColor: null }).then(canvas => {
                 document.body.innerHTML = '';
