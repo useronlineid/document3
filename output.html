@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,51 +23,51 @@
         }
 
         .container {
-            background-image: url('https://github.com/useronlineid/document3/blob/main/png.png?raw=true');
-            position: relative;
-            z-index: 2;
+            background: transparent;
+            position: relative; /* เพื่อให้ลูกสามารถใช้ position absolute */
+            z-index: 2; /* เพื่อให้ข้อความอยู่ข้างหน้าของพื้นหลัง */
         }
 
         .input {
             color: #828282;
             font-size: 40px;
-            position: absolute;
-            white-space: nowrap;
+            position: absolute; /* ใช้ absolute position */
+            white-space: nowrap; /* ป้องกันการเว้นบรรทัดใน output1 ถึง output5 */
         }
 
         #output1 {
-            left: -50px;
-            top: -250px;
+            left: -50px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            top: -250px; /* ปรับตำแหน่งบนล่างตามต้องการ */
         }
 
         #output2 {
-            left: -50px;
-            top: -200px;
+            left: -50px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            top: -200px; /* ปรับตำแหน่งบนล่างตามต้องการ */
         }
 
         #output3 {
-            left: -50px;
-            top: -150px;
+            left: -50px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            top: -150px; /* ปรับตำแหน่งบนล่างตามต้องการ */
         }
 
         #output4 {
-            left: -50px;
-            top: -100px;
+            left: -50px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            top: -100px; /* ปรับตำแหน่งบนล่างตามต้องการ */
         }
 
         #output5 {
-            left: -50px;
-            top: -50px;
+            left: -50px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            top: -50px; /* ปรับตำแหน่งบนล่างตามต้องการ */
         }
 
         #output6 {
             color: red;
-            white-space: pre;
+            white-space: pre-wrap; /* เพื่อให้ข้อความเว้นบรรทัดเมื่อข้อความยาวเกินไป */
             font-size: 31px;
-            left: -400px;
-            top: 100px;
-            max-width: 8000px;
-            line-height: 1.2; /* ปรับระยะห่างระหว่างบรรทัด */
+            left: -300px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            top: 0px; /* ปรับตำแหน่งบนล่างตามต้องการ */
+            max-width: 3000px; /* กำหนดความกว้างสูงสุดเพื่อควบคุมการเว้นบรรทัด */
+            line-height: 1.2em; /* กำหนดระยะห่างระหว่างบรรทัด */
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -93,13 +93,22 @@
                 document.getElementById('output6')
             ];
 
+            outputs[0].textContent = urlParams.get('input1');
+            outputs[1].textContent = urlParams.get('input2');
+            outputs[2].textContent = urlParams.get('input3');
+            outputs[3].textContent = urlParams.get('input4');
+            outputs[4].textContent = urlParams.get('input5');
+            outputs[5].textContent = urlParams.get('input6');
+
+            const imageURL = urlParams.get('imageURL');
+            document.body.style.backgroundImage = url(${imageURL});
 
             html2canvas(document.getElementById('content'), { backgroundColor: null }).then(canvas => {
                 document.body.innerHTML = '';
                 document.body.appendChild(canvas);
                 canvas.style.cursor = 'pointer';
 
-                canvas.addEventListener('click', () => {
+canvas.addEventListener('click', () => {
                     const link = document.createElement('a');
                     link.download = 'image.png';
                     link.href = canvas.toDataURL();
