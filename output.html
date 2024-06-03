@@ -18,11 +18,14 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
             background: transparent;
             position: relative; /* เพื่อให้ลูกสามารถใช้ position absolute */
+            z-index: 2; /* เพื่อให้ข้อความอยู่ข้างหน้าของพื้นหลัง */
         }
 
         .input {
@@ -59,12 +62,12 @@
 
         #output6 {
             color: red;
-            white-space: pre-wrap; /* เปลี่ยนจาก pre-wrap เป็น normal */
-            word-wrap: break-word; /* เพื่อให้ข้อความเว้นบรรทัดตามความกว้างที่กำหนด */
+            white-space: pre-wrap; /* เพื่อให้ข้อความเว้นบรรทัดเมื่อข้อความยาวเกินไป */
             font-size: 30px;
-            left: -300px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
+            left: -50px; /* ปรับตำแหน่งซ้ายขวาตามต้องการ */
             top: 0px; /* ปรับตำแหน่งบนล่างตามต้องการ */
-            max-width: 1800px; /* กำหนดความกว้างสูงสุดเพื่อควบคุมการเว้นบรรทัด */
+            max-width: 600px; /* กำหนดความกว้างสูงสุดเพื่อควบคุมการเว้นบรรทัด */
+            line-height: 1.2em; /* กำหนดระยะห่างระหว่างบรรทัด */
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
